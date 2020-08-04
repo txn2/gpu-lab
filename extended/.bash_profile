@@ -34,5 +34,5 @@ PROMPT_COMMAND='PS1="${c_reset}${c_path}\w${c_reset}\n${c_user}${JUPYTERHUB_USER
 
 sleep 1 # wait for terminal to render
 figlet $PLATFORM_NAME
-echo $PLATFORM_WORKSPACE
+echo $PLATFORM_ENVIRONMENT
 cd ~
