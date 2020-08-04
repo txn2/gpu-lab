@@ -2,11 +2,20 @@
 
 GPU enabled JupyterLab containers.
 
-## Build Process
+## Extended Container
+
+- `txn2/gpu-lab-ex:v1.0.0`
+
+```bash
+docker build -t gpu-lab-ex:latest ./extended/
+docker tag gpu-lab-ex:latest txn2/gpu-lab-ex:v1.0.0
+```
 
 ## Base Container
 
-Re-build base image if needed:
+- `txn2/gpu-lab-base:v1.0.0`
+
+Re-building base image:
 ```bash
 # clone the iot-salzburg/gpu-jupyter project
 git clone https://github.com/iot-salzburg/gpu-jupyter.git
@@ -26,10 +35,4 @@ docker run --rm -p 8888:8888 \
     -e GRANT_SUDO="yes" \
     -e JUPYTER_ENABLE_LAB="yes" \
     txn2/gpu-lab-base:v1.0.0
-
 ```
-
-### Base Versions
-
-#### `v1.0.0`
-  - `jupyterlab=2.1.3`
