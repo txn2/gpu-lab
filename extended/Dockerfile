@@ -1,4 +1,4 @@
-FROM txn2/gpu-lab-base:v1.0.0
+FROM txn2/gpu-lab-base:v2.0.0
 
 LABEL maintainer="Craig Johnston <cj@imti.co>"
 
@@ -19,17 +19,27 @@ USER root
 
 # deps
 RUN apt-get update
-RUN apt-get install -y figlet octave gnuplot
+RUN apt-get install -y figlet octave gnuplot nodejs
+
+# minio cli
+RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc -o /usr/bin/mc \
+    && chmod +x /usr/bin/mc
+
 
 RUN pip install --upgrade jupyterlab-git
-RUN jupyter serverextension enable --py jupyterlab_git
-RUN jupyter labextension install @jupyterlab/git
 
+# tensorflow and pytorch are installed in the
+# base container.
 # add and upgrade kernels and libs
 RUN pip install --upgrade --no-cache \
-    dask[complete] \
-    jupyterlab-nvdashboard \
     autopep8 \
+    jupyter-lsp \
+    python-language-server[all] \
+    xeus-python==0.7.1 \
+    ptvsd \
+    boto3 \
+    minio \
+    jupyterlab-git \
     bash_kernel \
     nbresuse \
     pylantern \
@@ -46,16 +56,19 @@ RUN pip install --upgrade --no-cache \
     pandas \
     scikit-learn \
     matplotlib \
-    tensorflow \
-    torch \
-    torchvision \
     fastai \
     octave_kernel \
     paho-mqtt \
     web3 \
+    Faker \
     py-solc
 
+# install R language server
+RUN R -e 'install.packages("languageserver", repos = "http://cran.us.r-project.org")'
+
 RUN python -m bash_kernel.install
+
+RUN jupyter serverextension enable --py jupyterlab_git
 
 RUN jupyter labextension install \
     @jupyterlab/debugger \
@@ -64,12 +77,13 @@ RUN jupyter labextension install \
     @jupyterlab/geojson-extension \
     @jupyterlab/git \
     @jupyterlab/fasta-extension \
-    jupyterlab-nvdashboard \
+    @krassowski/jupyterlab-lsp \
     jupyterlab-system-monitor \
     jupyterlab-drawio
 
 # disable user extension management
 RUN jupyter labextension disable @jupyterlab/extensionmanager-extension
+RUN jupyter lab build
 
 # Fix permissions
 RUN fix-permissions $CONDA_DIR
