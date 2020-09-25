@@ -1,4 +1,4 @@
-FROM txn2/gpu-lab-base:v2.0.0
+FROM txn2/gpu-lab-base:v2.0.1
 
 LABEL maintainer="Craig Johnston <cj@imti.co>"
 
@@ -36,6 +36,7 @@ RUN pip install --upgrade --no-cache \
     jupyter-lsp \
     python-language-server[all] \
     xeus-python==0.7.1 \
+    plotly==4.10.0 \
     ptvsd \
     boto3 \
     minio \
