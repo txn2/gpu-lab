@@ -48,6 +48,7 @@ RUN pip install --upgrade --no-cache \
     elasticsearch \
     pandasticsearch \
     kafka-python \
+    kaleido \
     kubernetes \
     nbgitpuller \
     rubix \
@@ -80,7 +81,8 @@ RUN jupyter labextension install \
     @jupyterlab/fasta-extension \
     @krassowski/jupyterlab-lsp \
     jupyterlab-system-monitor \
-    jupyterlab-drawio
+    jupyterlab-drawio \
+    jupyterlab-plotly@4.9.0
 
 # disable user extension management
 RUN jupyter labextension disable @jupyterlab/extensionmanager-extension

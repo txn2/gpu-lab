@@ -4,16 +4,16 @@ GPU enabled JupyterLab containers.
 
 ## Latest Extended Container
 
-- `txn2/gpu-lab-ex:v2.0.1`
+- `txn2/gpu-lab-ex:v2.0.2`
 
 ```bash
 docker build -t txn2/gpu-lab-ex:latest ./extended/
-docker tag txn2/gpu-lab-ex:latest txn2/gpu-lab-ex:v2.0.1
+docker tag txn2/gpu-lab-ex:latest txn2/gpu-lab-ex:v2.0.2
 docker push txn2/gpu-lab-ex:latest
-docker push txn2/gpu-lab-ex:v2.0.1
+docker push txn2/gpu-lab-ex:v2.0.2
 
 # test container
-docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYTER_ENABLE_LAB="yes" txn2/gpu-lab-ex:v2.0.0
+docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYTER_ENABLE_LAB="yes" txn2/gpu-lab-ex:v2.0.2
 
 # root exec
 docker exec -it lab bash
@@ -22,7 +22,7 @@ docker exec -it lab bash
 
 ## Latest Base Container
 
-- `txn2/gpu-lab-base:v2.0.0`
+- `txn2/gpu-lab-base:v2.0.1`
 
 Re-building base container:
 ```bash
