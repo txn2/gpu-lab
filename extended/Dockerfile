@@ -82,7 +82,7 @@ RUN jupyter labextension install \
     @krassowski/jupyterlab-lsp \
     jupyterlab-system-monitor \
     jupyterlab-drawio \
-    jupyterlab-plotly@4.9.0
+    jupyterlab-plotly@4.10.0
 
 # disable user extension management
 RUN jupyter labextension disable @jupyterlab/extensionmanager-extension
