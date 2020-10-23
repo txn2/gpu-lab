@@ -12,7 +12,7 @@ docker tag txn2/gpu-lab-ex:latest txn2/gpu-lab-ex:v2.0.4
 docker push txn2/gpu-lab-ex:latest
 docker push txn2/gpu-lab-ex:v2.0.4
 
-# test container
+# test container (password: asdf)
 docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYTER_ENABLE_LAB="yes" txn2/gpu-lab-ex:v2.0.2
 
 # root exec
