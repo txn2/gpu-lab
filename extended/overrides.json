@@ -1,5 +1,8 @@
 {
   "@jupyterlab/terminal-extension:plugin": {
     "theme": "dark"
+  },
+  "@jupyterlab/git:plugin": {
+    "displayStatus": false
   }
 }
