@@ -10,7 +10,7 @@ services:
   lab:
     container_name: lab
     # https://hub.docker.com/repository/docker/txn2/gpu-lab-ex
-    image: txn2/gpu-lab-ex:v2.0.8
+    image: txn2/gpu-lab-ex:v2.0.9
     ports:
       - "8888:8888"
     environment:
@@ -19,6 +19,8 @@ services:
       - JUPYTER_ENABLE_LAB=yes
     volumes:
       - ./notebooks:/home/jovyan/notebooks
+      - ./extensions:/home/jovyan/extensions
+      - ./devcfg/jupyter_notebook_config.py:/etc/jupyter/jupyter_notebook_config.py
       - "artifacts:/artifacts:rw"
     user: root # for development and debugging
   mlflow:
