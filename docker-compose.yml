@@ -1,0 +1,32 @@
+version: "3.3"
+volumes:
+  data:
+  artifacts:
+    driver_opts:
+      type: "tmpfs"
+      o: "gid=100,uid=1000"
+      device: "tmpfs"
+services:
+  lab:
+    container_name: lab
+    # https://hub.docker.com/repository/docker/txn2/gpu-lab-ex
+    image: txn2/gpu-lab-ex:v2.0.8
+    ports:
+      - "8888:8888"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - GRANT_SUDO=yes # for development and debugging
+      - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      - ./notebooks:/home/jovyan/notebooks
+      - "artifacts:/artifacts:rw"
+    user: root # for development and debugging
+  mlflow:
+    container_name: mlflow
+    # https://hub.docker.com/repository/docker/txn2/mlflow
+    image: txn2/mlflow:1.11.0-v1
+    command: server --host=0.0.0.0 --port=5000 --backend-store-uri=sqlite:///data.db --default-artifact-root=/artifacts
+    volumes:
+    - artifacts:/artifacts
+    ports:
+      - "5000:5000"
