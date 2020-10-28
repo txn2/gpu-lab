@@ -57,6 +57,7 @@ RUN pip install --upgrade --no-cache \
     gensim \
     ipywidgets \
     jupyter-lsp \
+    jupyter-server-proxy \
     jupyterlab-git \
     kafka-python \
     kaleido \
@@ -99,6 +100,7 @@ RUN jupyter labextension install \
     @jupyterlab/geojson-extension \
     @jupyterlab/git \
     @jupyterlab/fasta-extension \
+    @jupyterlab/server-proxy \
     @krassowski/jupyterlab-lsp \
     jupyterlab-system-monitor \
     jupyterlab-drawio \
@@ -107,6 +109,7 @@ RUN jupyter labextension install \
 
 # extension management
 RUN jupyter serverextension enable --py jupyterlab_git \
+ && jupyter serverextension enable --sys-prefix jupyter_server_proxy \
  && jupyter labextension disable @jupyterlab/extensionmanager-extension \
  && jupyter lab build
 
