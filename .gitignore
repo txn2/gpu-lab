@@ -1,2 +1,4 @@
 .idea
 gpu-jupyter
+data
+*.svg
