@@ -5,16 +5,16 @@ GPU enabled JupyterLab containers.
 ## Container Development
 
 ### Latest Extended Container
-- `txn2/gpu-lab-ex:v2.0.8`
+- `txn2/gpu-lab-ex:v2.0.9`
 
 ```bash
 docker build -t txn2/gpu-lab-ex:latest ./extended/
-docker tag txn2/gpu-lab-ex:latest txn2/gpu-lab-ex:v2.0.8
+docker tag txn2/gpu-lab-ex:latest txn2/gpu-lab-ex:v2.0.9
 docker push txn2/gpu-lab-ex:latest
-docker push txn2/gpu-lab-ex:v2.0.8
+docker push txn2/gpu-lab-ex:v2.0.9
 
 # test container (password: asdf)
-docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYTER_ENABLE_LAB="yes" txn2/gpu-lab-ex:v2.0.8
+docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYTER_ENABLE_LAB="yes" txn2/gpu-lab-ex:v2.0.9
 
 # root exec
 docker exec -it lab bash
@@ -60,11 +60,25 @@ docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYT
 
 ```
 
+## Development Notes
+
+### Server Proxy
+
+- Configuration
+  - https://jupyter-server-proxy.readthedocs.io/en/latest/server-process.html#specifying-config-via-traitlets
+  - https://github.com/jupyterhub/jupyter-server-proxy/blob/master/jupyter_server_proxy/config.py
+  - https://jupyter-contrib-nbextensions.readthedocs.io/en/latest/config.html
+
+
 ## Local Testing & MLFlow
 
 - [Nvidia Docker Runtime](https://cnvrg.io/how-to-setup-docker-and-nvidia-docker-2-0-on-ubuntu-18-04/)
 - [MLFLow Container Development](https://github.com/txn2/mlflow)
 
 
+### Extension Development
 
-###
+Build example **MLFlow Tab** extension:
+```
+docker exec -it lab bash -c "cd ~/extensions/mlflow-tab && jlpm && jlpm run build && jupyter labextension install ."
+```
