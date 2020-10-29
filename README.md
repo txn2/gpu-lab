@@ -80,5 +80,5 @@ docker run --rm --name lab -p 8888:8888 --user root -e GRANT_SUDO="yes" -e JUPYT
 
 Build example **MLFlow Tab** extension:
 ```
-docker exec -it lab bash -c "cd ~/extensions/mlflow-tab && jlpm && jlpm run build && jupyter labextension install ."
+docker exec lab bash -c "cd ~/extensions/mlflow-tab && jlpm && jlpm run build && jupyter labextension install ."
 ```
